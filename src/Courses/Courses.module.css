@@ -1,0 +1,37 @@
+.page {
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  gap: 32px;
+  padding: 32px;
+}
+
+.left {
+  flex: 2;
+}
+
+.right {
+  flex: 1;
+}
+
+.tabs {
+  display: flex;
+  gap: 24px;
+  margin: 16px 0 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.tabs span {
+  padding-bottom: 4px;
+}
+
+.active {
+  color: #1b7a57;
+  border-bottom: 2px solid #1b7a57;
+}

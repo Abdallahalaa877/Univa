@@ -1,0 +1,39 @@
+.card {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: #e5f5f0;
+  padding: 8px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.info p {
+  font-size: 14px;
+  color: #6b7280;
+}
