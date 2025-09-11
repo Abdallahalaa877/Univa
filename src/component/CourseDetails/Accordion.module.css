@@ -1,0 +1,55 @@
+.accordion {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  background: #fff;
+  overflow: hidden;
+}
+
+.header {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  background: #f9f9f9;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header:hover {
+  background: #f1f1f1;
+}
+
+.content {
+  padding: 1rem 1.2rem;
+  border-top: 1px solid #eee;
+}
+
+.content h4 {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.content ul {
+  padding-left: 1rem;
+  margin: 0;
+}
+
+.content li {
+  margin-bottom: 0.4rem;
+  list-style: none;
+  position: relative;
+  color: #444;
+}
+
+.content li::before {
+  content: "✔";
+  color: #2e7d32;
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+}

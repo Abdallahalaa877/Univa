@@ -1,0 +1,36 @@
+.tabs {
+  display: flex;
+  gap: 2rem;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1.5rem;
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #555;
+  position: relative;
+}
+
+.tab:hover {
+  color: #2e7d32;
+}
+
+.active {
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #2e7d32;
+  border-radius: 2px;
+}

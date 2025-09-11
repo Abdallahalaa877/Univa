@@ -8,7 +8,6 @@ export default function Courses() {
   return (
     <div className={styles.page}>
      <Navbar onLoginClick={() => console.log("Login clicked")} />
-
       <div className={styles.container}>
         <div className={styles.left}>
           <h2>My Courses</h2>
