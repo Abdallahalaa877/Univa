@@ -1,0 +1,128 @@
+.page {
+  max-width: 100%; /* اوسع عشان الصفحة تاخد شكل كامل */
+  margin: 20px auto;
+  font-family: system-ui, sans-serif;
+  color: #0c141c;
+  
+}
+
+/* Banner */
+.banner {
+  background: #0f766e;
+  color: white;
+  padding: 24px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.banner h2 {
+  margin: 0;
+}
+.bannerBtn {
+  background: white;
+  color: #0f766e;
+  font-weight: 600;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Search */
+.searchBox {
+  margin: 20px 0;
+}
+.searchBox input {
+  width: 96%;
+  padding: 12px 14px;
+  
+  border-radius: 8px;
+  border: 1px solid #d8dee5;
+  background: #f7f9fc;
+  font-size: 14px;
+  display: block;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.filterBtn {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  cursor: pointer;
+  font-size: 14px;
+}
+.filterBtn.active {
+  background: #0f766e;
+  color: white;
+}
+
+/* Cards */
+.card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid #d8dee5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.imagePlaceholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  background: #e2e8f0;
+}
+
+.cardBody h3 {
+  margin: 0 0 6px;
+  /* padding-left: 25px; */
+  font-size: 16px;
+  text-align: left;
+}
+.cardBody p {
+  margin: 0;
+  font-size: 14px;
+  color: #444;
+}
+
+/* Badges */
+.badgeEvent,
+.badgeAnnouncement,
+.badgeDeadline,
+.badgeResource {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.badgeEvent {
+  background: #e6f4ef;
+  color: #0f766e;
+}
+.badgeAnnouncement {
+  background: #e5f0fb;
+  color: #2563eb;
+}
+.badgeDeadline {
+  background: #fef3c7;
+  color: #b45309;
+}
+.badgeResource {
+  background: #ede9fe;
+  color: #6d28d9;
+}
