@@ -1,23 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Login from './login/login.tsx'
-import Navbar from './component/navBar.tsx'
-import { Routes, Route } from "react-router-dom";
-import Home from "./Home/home.tsx";
-function App() {
-  // const [count, setCount] = useState(0)
+import { useState } from "react";
+import Navbar from "./component/navBar";
+import Home from "./Home/home";
+import Login from "./login/login";
+
+export default function App() {
+  const [showLogin, setShowLogin] = useState(false);
 
   return (
     <>
-   <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <Navbar onLoginClick={() => setShowLogin(true)} />
+      
+      {/* الصفحة الرئيسية */}
+      <Home />
+
+      {/* لو ضغط Login يظهر Tab */}
+      {showLogin && (
+        <div style={{
+          position: "fixed",
+          top: "80px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          background: "#fff",
+          border: "1px solid #ccc",
+          borderRadius: "8px",
+          padding: "20px",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+          zIndex: 1000,
+          width: "400px"
+        }}>
+          <button 
+            style={{
+              float: "right",
+              border: "none",
+              background: "transparent",
+              fontSize: "18px",
+              cursor: "pointer"
+            }}
+            onClick={() => setShowLogin(false)}
+          >
+            ✖
+          </button>
+          <Login />
+        </div>
+      )}
     </>
   );
 }
-
-export default App

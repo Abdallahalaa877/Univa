@@ -1,13 +1,17 @@
 import styles from "./Navbar.module.css";
-import logo from "/public/univa.png"; // حط صورة اللوجو في public أو src
 
-export default function Navbar() {
+interface NavbarProps {
+  onLoginClick: () => void; // نستقبل الـ prop من App.tsx
+}
+
+export default function Navbar({ onLoginClick }: NavbarProps) {
   return (
     <header className={styles.navbar}>
       <div className={styles.container}>
         {/* Left: Logo */}
         <div className={styles.logo}>
-          <img src={logo} alt="Univa" />
+          {/* لو الصورة في public/ */}
+          <img src="/univa.png" alt="Univa" />
         </div>
 
         {/* Center: Links */}
@@ -25,7 +29,9 @@ export default function Navbar() {
         </nav>
 
         {/* Right: Login Button */}
-        <a href="#" className={styles.loginBtn}>Login</a>
+        <button className={styles.loginBtn} onClick={onLoginClick}>
+          Login
+        </button>
       </div>
     </header>
   );
