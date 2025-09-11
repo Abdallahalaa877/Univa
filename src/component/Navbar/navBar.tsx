@@ -1,38 +1,49 @@
-import styles from "./Navbar.module.css";
+import styles from "./navbar.module.css";
+import { useState } from "react";
 
-interface NavbarProps {
-  onLoginClick: () => void; // نستقبل الـ prop من App.tsx
-}
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
 
-export default function Navbar({ onLoginClick }: NavbarProps) {
-  return (
+    return (
     <header className={styles.navbar}>
       <div className={styles.container}>
-        {/* Left: Logo */}
+        {/* Logo */}
         <div className={styles.logo}>
-          {/* لو الصورة في public/ */}
           <img src="/univa.png" alt="Univa" />
         </div>
 
-        {/* Center: Links */}
+        {/* Links */}
         <nav className={styles.navLinks}>
           <a href="#" className={styles.active}>Home</a>
-          <div className={styles.dropdown}>
-            <button className={styles.dropbtn}>Downloads ▾</button>
-            <div className={styles.dropdownContent}>
-              <a href="#">Windows Client</a>
-              <a href="#">macOS Client</a>
-              <a href="#">Android / iOS</a>
-            </div>
-          </div>
+          <a href="#">Courses ▾</a>
+          <a href="#">Grades</a>
           <a href="#">Support</a>
         </nav>
 
-        {/* Right: Login Button */}
-        <button className={styles.loginBtn} onClick={onLoginClick}>
-          Login
-        </button>
+         {/* Avatar + Arrow */}
+          <div className={styles.profile}>
+            <img
+              src="/avatar.png"
+              alt="Profile"
+              className={styles.avatar}
+            />
+            <button
+              className={styles.arrowBtn}
+              onClick={() => setOpen(!open)}
+            >
+              ▾
+            </button>
+
+            {/* Dropdown */}
+            {open && (
+              <div className={styles.dropdown}>
+                <button className={styles.dropdownItem}>Logout</button>
+              </div>
+            )}
+          </div>
+        
       </div>
     </header>
   );
+
 }

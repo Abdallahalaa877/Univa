@@ -4,7 +4,7 @@ import Tabs from "../component/CourseDetails/Tabs";
 import CourseInfo from "../component/CourseDetails/CourseInfo";
 import Assignments from "../component/CourseDetails/Assignments";
 import Accordion from "../component/CourseDetails/Accordion";
-import Navbar from "../component/Navbar/navBar";
+import Navbar from "../component/Navbarforlogin/navBar";
 
 
 const CourseDetails: React.FC = () => {

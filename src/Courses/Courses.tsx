@@ -1,4 +1,4 @@
-import Navbar from "../component/Navbar/navBar";
+import Navbar from "../component/Navbarforlogin/navBar";
 import CourseCard from "../component/CourseCard/CourseCard";
 import Calendar from "../component/Calender/Calendar";
 import DeadlineCard from "../component/DeadlineCard/DeadlineCard";
