@@ -1,7 +1,7 @@
 import styles from "./home.module.css";
-
 export default function Events() {
   return (
+    
     <div className={styles.page}>
       {/* Banner */}
       <div className={styles.banner}>
