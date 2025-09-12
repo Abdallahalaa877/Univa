@@ -7,6 +7,7 @@ import CourseDetails from "./CourseDetails/CourseDetails";
 import StudentProfile from "./StudentProfile/StudentProfile";
 import SubmitRequest from "./SubmitRequest/SubmitRequest";
 import Grades from "./Grades/Grades";
+import Enrollment from "./Enrollment/Enrollment";
 
 
 
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/profile" element={<StudentProfile />} />
          <Route path="/SubmitRequest" element={<SubmitRequest />} />
          <Route path="/Grades" element={<Grades />} />
+         <Route path="/enroll" element={<Enrollment />} />
 
 
 

@@ -1,0 +1,119 @@
+.container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.coursesList {
+  flex: 2;
+}
+
+.courseCard {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #f9f9f9;
+}
+
+.courseInfo h3 {
+  margin: 0.3rem 0;
+  font-size: 1.2rem;
+}
+
+.courseCode {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.courseActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.enrollBtn {
+  background: #007b5e;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.dropBtn {
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.viewBtn {
+  background: #f0f0f0;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.myCourses {
+  flex: 1;
+  border-left: 1px solid #ddd;
+  padding-left: 1rem;
+}
+
+.myCourseCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eef9f5;
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.totalCredits {
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.submitBtn {
+  background: #007b5e;
+  color: white;
+  padding: 0.7rem;
+  width: 100%;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.successMessage {
+  margin-top: 1rem;
+  background: #f5fff5;
+  border: 1px solid #28a745;
+  padding: 0.8rem;
+  border-radius: 6px;
+  color: #28a745;
+}
+
+.scheduleBtn {
+  margin-top: 0.5rem;
+  background: #007b5e;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.select {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background-color: #f8f9fa;
+  font-size: 14px;
+}
