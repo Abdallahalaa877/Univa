@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Enrollment.module.css";
 import Navbar from "../component/Navbar/navBar";
+import { useNavigate } from "react-router-dom";
 
 interface Course {
   id: string;
@@ -59,6 +60,8 @@ const EnrollmentPage: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [selectedTerm, setSelectedTerm] = useState("Spring 2025");
 
+  const navigate = useNavigate();
+
   const toggleEnroll = (course: Course) => {
     if (enrolled.some((c) => c.id === course.id)) {
       setEnrolled(enrolled.filter((c) => c.id !== course.id)); // Drop
@@ -73,15 +76,16 @@ const EnrollmentPage: React.FC = () => {
     }
   };
 
+  const handleViewSchedule = () => {
+    navigate("/schedule"); // go to schedule page
+  };
+
   const totalCredits = enrolled.reduce((acc, c) => acc + c.credit, 0);
 
   const terms = Array.from(new Set(coursesData.map((c) => c.term)));
   const filteredCourses = coursesData.filter((c) => c.term === selectedTerm);
 
   return (
-    <>
-              {/* ✅ Navbar at the top */}
-              <Navbar />
     <div className={styles.container}>
       {/* Left side - Available Courses */}
       <div className={styles.coursesList}>
@@ -159,12 +163,16 @@ const EnrollmentPage: React.FC = () => {
         {success && (
           <div className={styles.successMessage}>
             <p>✅ Enrollment Successful</p>
-            <button className={styles.scheduleBtn}>View Schedule</button>
+            <button
+              className={styles.scheduleBtn}
+              onClick={handleViewSchedule}
+            >
+              View Schedule
+            </button>
           </div>
         )}
       </div>
     </div>
-    </>
   );
 };
 

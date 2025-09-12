@@ -9,10 +9,9 @@ import SubmitRequest from "./SubmitRequest/SubmitRequest";
 import Grades from "./Grades/Grades";
 import Enrollment from "./Enrollment/Enrollment";
 import SupportTicket from "./SupportTicket/supportTicket";
-
-
-
-
+import Login from "./login/login";
+import Home from"./Home/home";
+import Schedule from "./Schedule/Schedule"
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -20,6 +19,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
          <Route path="/courses/:id" element={<CourseDetails />} />
         <Route path="/profile" element={<StudentProfile />} />
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
          <Route path="/Grades" element={<Grades />} />
          <Route path="/enroll" element={<Enrollment />} />
           <Route path="/support" element={<SupportTicket />} />
+          <Route path="/Schedule" element={<Schedule />} />
 
 
 
