@@ -1,4 +1,4 @@
-import Navbar from "../component/Navbarforlogin/navBar";
+import Navbar from "../component/Navbar/navBar";
 import CourseCard from "../component/CourseCard/CourseCard";
 import Calendar from "../component/Calender/Calendar";
 import DeadlineCard from "../component/DeadlineCard/DeadlineCard";
@@ -7,7 +7,7 @@ import styles from "./Courses.module.css";
 export default function Courses() {
   return (
     <div className={styles.page}>
-     <Navbar onLoginClick={() => console.log("Login clicked")} />
+     <Navbar  />
       <div className={styles.container}>
         <div className={styles.left}>
           <h2>My Courses</h2>

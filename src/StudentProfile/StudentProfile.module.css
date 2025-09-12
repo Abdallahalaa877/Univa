@@ -1,0 +1,59 @@
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+}
+
+.fieldGroup {
+  margin-bottom: 1rem;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+  display: block;
+  color: #333;
+}
+
+.value {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #e6e6e6;
+  font-size: 1rem;
+  background-color: #e0f2e9; /* ✅ Light green like screenshot */
+  color: #000;
+}
+
+.value[readonly] {
+  background-color: #f9fafa;
+  border: 1px solid #ddd;
+  color: #444;
+}
+
+.saveButton {
+  margin-top: 2rem;
+  background-color: #007a5c; /* Univa green */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.saveButton:hover {
+  background-color: #005a43;
+}
+
+.icon {
+  font-size: 1.2rem;
+}
