@@ -1,0 +1,87 @@
+.container {
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exportBtn {
+  background-color: #006d5b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.search {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background-color: #f8f9fa;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.table th,
+.table td {
+  padding: 0.8rem;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.pass {
+  background-color: #006d5b;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.fail {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.summary {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+}
+
+.card {
+  flex: 1;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  background: #fdfdfd;
+}
+
+.card h3 {
+  margin-top: 0.5rem;
+  color: #006d5b;
+}
+.select {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background-color: #f8f9fa;
+  font-size: 14px;
+}
