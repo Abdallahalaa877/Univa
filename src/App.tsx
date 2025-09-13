@@ -9,8 +9,9 @@ import Support from "./SupportTicket/supportTicket";
 import Profile from "./StudentProfile/StudentProfile";
 const App: React.FC = () => {
   return (
+     <>
     <Router>
-      <Navbar />
+      
       <div style={{ padding: "20px" }}>
         <Routes>
           <Route path="/home" element={<Home />} />
@@ -22,6 +23,7 @@ const App: React.FC = () => {
         </Routes>
       </div>
     </Router>
+    </>
   );
 };
 

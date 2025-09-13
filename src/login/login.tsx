@@ -1,7 +1,4 @@
-import { useState } from "react";
-import s from "./login.module.css";
-import Navbar from "../component/Navbarforlogin/navBar";
-
+/*
 export default function Login() {
   const [show, setShow] = useState(false);
 
@@ -27,8 +24,8 @@ export default function Login() {
               placeholder="Enter your password"
             />
             <button type="button" className={s.eyeBtn} onClick={() => setShow(v => !v)} aria-label="Toggle password">
-              {/* eye icon */}
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+              {/* eye icon }*/
+             /* <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 {show ? (
                   <>
@@ -58,3 +55,96 @@ export default function Login() {
 
   );
 }
+ */
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./Login.module.css";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import Navbar from "../component/Navbarforlogin/navBar"
+
+const Login: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate(); // ✅ Correct hook
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    console.log("Logging in with:", { email, password, remember });
+
+    // ✅ Redirect to home page
+    navigate("/home");
+  };
+
+  return (
+    <>
+    {}
+    <Navbar/>
+    
+    <div className={styles.loginContainer}>
+      <div className={styles.card}>
+        <h2 className={styles.title}>Welcome back</h2>
+
+        <form className={styles.form} onSubmit={handleSubmit}>
+          {/* Email */}
+          <div className={styles.inputGroup}>
+            <label htmlFor="email">Email or Username</label>
+            <input
+              id="email"
+              type="text"
+              value={email}
+              placeholder="Enter your email or username"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          {/* Password */}
+          <div className={styles.inputGroup}>
+            <label htmlFor="password">Password</label>
+            <div className={styles.passwordWrapper}>
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                placeholder="Enter your password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                className={styles.eyeBtn}
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FiEyeOff /> : <FiEye />}
+              </button>
+            </div>
+            <a href="/forgot-password" className={styles.forgot}>
+              Forgot password?
+            </a>
+          </div>
+
+          {/* Remember me */}
+          <div className={styles.rememberMe}>
+            <input
+              type="checkbox"
+              id="remember"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+            />
+            <label htmlFor="remember">Remember me</label>
+          </div>
+
+          {/* Submit */}
+          <button type="submit" className={styles.loginBtn}>
+            Log in
+          </button>
+        </form>
+      </div>
+    </div>
+    </>
+  );
+};
+
+export default Login;

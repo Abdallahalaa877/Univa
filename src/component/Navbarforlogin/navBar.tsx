@@ -1,34 +1,89 @@
-import styles from "./Navbar.module.css";
+import React from "react";
+import styles from "./navBar.module.css";
+import { NavLink } from "react-router-dom";
 
 interface NavbarProps {
-  onLoginClick: () => void; // نستقبل الـ prop من App.tsx
+  onLoginClick?: () => void; // optional prop
 }
 
-export default function Navbar({ onLoginClick }: NavbarProps) {
+const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
   return (
-    <div className={styles.container}>
-  <div className={styles.logo}>
-    <img src="/univa.png" alt="Univa" />
-  </div>
+    <nav className={styles.navbar}>
+     {/* Logo */}
+        <div className={styles.logo}>
+          <img src="/univa.png" alt="Univa" />
+        </div>
 
-  <nav className={styles.navLinks}>
-    <a href="#" className={styles.active}>Home</a>
-    <div className={styles.dropdown}>
-      <button className={styles.dropbtn}>Downloads ▾</button>
-      <div className={styles.dropdownContent}>
-        <a href="#">Windows Client</a>
-        <a href="#">macOS Client</a>
-        <a href="#">Android / iOS</a>
-      </div>
-    </div>
-    <a href="#">Support</a>
-  </nav>
+      {/* Links */}
+      <ul className={styles.navLinks}>
+        <li>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.active}` : styles.link
+            }
+          >
+            Home
+          </NavLink>
+        </li>
 
-  <div className={styles.actions}>
-    <button className={styles.loginBtn} onClick={onLoginClick}>
-      Login
-    </button>
-  </div>
-</div>
-  )
-}
+        {/* Downloads Dropdown */}
+        <li className={styles.dropdown}>
+          <span className={styles.link}>
+            Downloads <span className={styles.arrow}>▼</span>
+          </span>
+          <ul className={styles.dropdownMenu}>
+            <li>
+              <NavLink
+                to="/schedule"
+                className={({ isActive }) =>
+                  isActive ? `${styles.link} ${styles.active}` : styles.link
+                }
+              >
+                Schedule
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/catalog"
+                className={({ isActive }) =>
+                  isActive ? `${styles.link} ${styles.active}` : styles.link
+                }
+              >
+                Course Catalog
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/bylaw"
+                className={({ isActive }) =>
+                  isActive ? `${styles.link} ${styles.active}` : styles.link
+                }
+              >
+                Bylaw
+              </NavLink>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <NavLink
+            to="/support"
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.active}` : styles.link
+            }
+          >
+            Support
+          </NavLink>
+        </li>
+      </ul>
+
+      {/* Login Button */}
+      <button className={styles.loginBtn} onClick={onLoginClick}>
+        Login
+      </button>
+    </nav>
+  );
+};
+
+export default Navbar;
