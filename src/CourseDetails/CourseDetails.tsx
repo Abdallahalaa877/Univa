@@ -4,7 +4,7 @@ import Tabs from "../component/CourseDetails/Tabs";
 import CourseInfo from "../component/CourseDetails/CourseInfo";
 import Assignments from "../component/CourseDetails/Assignments";
 import Accordion from "../component/CourseDetails/Accordion";
-import Navbar from "../component/Navbarforlogin/navBar";
+import Navbar from "../component/Navbar/navBar";
 
 
 const CourseDetails: React.FC = () => {
@@ -32,7 +32,7 @@ const CourseDetails: React.FC = () => {
   return (
     <>
       {/* ✅ Navbar at the top */}
-      <Navbar onLoginClick={() => console.log("Login clicked")} />
+      <Navbar />
 
       <div className={styles.container}>
         {/* Left Side */}

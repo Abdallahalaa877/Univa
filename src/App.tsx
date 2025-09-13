@@ -7,6 +7,9 @@ import Enroll from "./Enrollment/Enrollment";
 import Grades from "./Grades/Grades";
 import Support from "./SupportTicket/supportTicket";
 import Profile from "./StudentProfile/StudentProfile";
+import CourseDetails from "./CourseDetails/CourseDetails";
+import StudentProfile from "./StudentProfile/StudentProfile";
+import SubmitRequest from "./SubmitRequest/SubmitRequest";
 const App: React.FC = () => {
   return (
      <>
@@ -20,6 +23,7 @@ const App: React.FC = () => {
           <Route path="/grades" element={<Grades />} />
           <Route path="/support" element={<Support />} />
           <Route path="/profile" element={<Profile />} />
+           <Route path="/coursedetails" element={<CourseDetails />} />
         </Routes>
       </div>
     </Router>

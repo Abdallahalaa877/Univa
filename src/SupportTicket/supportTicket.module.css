@@ -1,101 +1,72 @@
-.tickets-container {
+/* SupportTickets.module.css */
+
+.container {
   padding: 20px;
-  padding-top: 0px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 h2 {
-  margin-bottom: 15px;
-  font-size: 22px;
-  font-weight: bold;
+  margin-bottom: 16px;
+  color: #222;
 }
 
-.new-ticket {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.new-ticket input {
-  padding: 8px;
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.new-ticket button {
-  background-color: #00695c;
+.newTicketButton {
+  background-color: #056449;
   color: white;
+  padding: 10px 20px;
   border: none;
-  border-radius: 6px;
-  padding: 8px 15px;
-  font-size: 14px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 14px;
+  margin-bottom: 20px;
+  float: right;
 }
 
-.new-ticket button:hover {
-  background-color: #004d40;
+.newTicketButton:hover {
+  background-color: #044d36;
 }
 
-table {
+.table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
+  margin-top: 20px;
 }
 
-thead {
-  background-color: #f8f9fa;
+.table th,
+.table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
   text-align: left;
 }
 
-th, td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #e0e0e0;
-  font-size: 14px;
+.table th {
+  background-color: #f5f5f5;
+  color: #333;
 }
 
-tr:last-child td {
-  border-bottom: none;
-}
-
-/* Status Badges */
-.In\ Progress {
-  background-color: #fff3cd;
-  color: #856404;
-  padding: 5px 12px;
-  border-radius: 15px;
-  font-weight: 500;
-  font-size: 13px;
-}
-
-.Resolved {
-  background-color: #004d40;
-  color: #ffffff;
-  padding: 5px 12px;
-  border-radius: 15px;
-  font-weight: 500;
-  font-size: 13px;
-}
-
-button {
-  background-color: #00796b;
-  color: white;
-  border: none;
-  border-radius: 6px;
+.status {
   padding: 6px 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 13px;
 }
 
-button:hover:enabled {
-  background-color: #004d40;
+.open {
+  background-color: #d1f2eb;
+  color: #0e6251;
 }
 
-button:disabled {
-  background-color: #bdbdbd;
-  cursor: not-allowed;
+.inProgress {
+  background-color: #fcf3cf;
+  color: #7d6608;
+}
+
+.resolved {
+  background-color: #d5f5e3;
+  color: #145a32;
+}
+
+.closed {
+  background-color: #f5b7b1;
+  color: #78281f;
 }

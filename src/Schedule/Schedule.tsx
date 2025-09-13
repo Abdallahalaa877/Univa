@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./Schedule.module.css";
+import Navbar from "../component/Navbar/navBar";
+
 
 interface Course {
   id: string;
@@ -55,6 +57,9 @@ const SchedulePage: React.FC = () => {
   const terms = Array.from(new Set(enrolledCourses.map((c) => c.term)));
 
   return (
+    <>
+    {}
+    <Navbar/>
     <div className={styles.container}>
       <h2>My Schedule</h2>
       <p>Here’s an overview of your enrolled courses.</p>
@@ -93,6 +98,7 @@ const SchedulePage: React.FC = () => {
         </div>
       ))}
     </div>
+        </>
   );
 };
 

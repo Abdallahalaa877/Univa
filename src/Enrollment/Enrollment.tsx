@@ -86,6 +86,9 @@ const EnrollmentPage: React.FC = () => {
   const filteredCourses = coursesData.filter((c) => c.term === selectedTerm);
 
   return (
+    <>
+    {}
+    <Navbar/>
     <div className={styles.container}>
       {/* Left side - Available Courses */}
       <div className={styles.coursesList}>
@@ -173,6 +176,8 @@ const EnrollmentPage: React.FC = () => {
         )}
       </div>
     </div>
+        </>
+
   );
 };
 

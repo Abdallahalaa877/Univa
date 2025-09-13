@@ -1,127 +1,120 @@
-import React, { useState } from "react";
-import style from "./supportTicket.module.css";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./supportTicket.module.css";
+import Navbar from "../component/Navbar/navBar";
 
-export default function App() {
-  const today = new Date().toISOString().split("T")[0];
 
-  const [tickets, setTickets] = useState([]);
-  const [newSubject, setNewSubject] = useState("");
-  const [newPhone, setNewPhone] = useState("");
-  const [nextId, setNextId] = useState(1);
+const SupportTickets: React.FC = () => {
+  const navigate = useNavigate();
 
-  // إضافة تذكرة جديدة
-  const addTicket = () => {
-    if (newSubject.trim()) {
-      const newTicket = {
-        id: nextId,
-        subject: newSubject,
-        status: "In Progress",
-        dateSubmitted: today,
-        contactPhone: newPhone,
-        phoneLocked: newPhone.trim() !== ""
-      };
+  const tickets = [
+    {
+      id: "#12345",
+      subject: "Issue with Course Registration",
+      category: "Registration",
+      status: "Open",
+      dateSubmitted: "2024-07-26",
+      lastUpdate: "2024-07-27",
+      priority: "High",
+    },
+    {
+      id: "#12346",
+      subject: "Cannot Access Lecture Materials",
+      category: "Course Materials",
+      status: "In Progress",
+      dateSubmitted: "2024-07-25",
+      lastUpdate: "2024-07-26",
+      priority: "Medium",
+    },
+    {
+      id: "#12347",
+      subject: "Payment Confirmation Needed",
+      category: "Billing",
+      status: "Resolved",
+      dateSubmitted: "2024-07-24",
+      lastUpdate: "2024-07-25",
+      priority: "Low",
+    },
+    {
+      id: "#12348",
+      subject: "Technical Issue with Online Exam",
+      category: "Exams",
+      status: "Closed",
+      dateSubmitted: "2024-07-23",
+      lastUpdate: "2024-07-24",
+      priority: "High",
+    },
+    {
+      id: "#12349",
+      subject: "Request for Transcript",
+      category: "Transcripts",
+      status: "Open",
+      dateSubmitted: "2024-07-22",
+      lastUpdate: "2024-07-23",
+      priority: "Medium",
+    },
+  ];
 
-      setTickets((prev) => {
-        const updated = [...prev, newTicket].filter(
-          (t) => t.dateSubmitted === today
-        );
-        return updated;
-      });
-
-      setNextId(nextId + 1);
-      setNewSubject("");
-      setNewPhone("");
+  const getStatusClass = (status: string) => {
+    switch (status) {
+      case "Open":
+        return styles.open;
+      case "In Progress":
+        return styles.inProgress;
+      case "Resolved":
+        return styles.resolved;
+      case "Closed":
+        return styles.closed;
+      default:
+        return "";
     }
   };
 
-  // تغيير الحالة إلى Resolved
-  const markResolved = (id) => {
-    setTickets(
-      tickets.map((t) =>
-        t.id === id ? { ...t, status: "Resolved" } : t
-      )
-    );
-  };
-
-  // تحديث رقم التليفون (بس لو مش مقفول)
-  const updatePhone = (id, phone) => {
-    setTickets(
-      tickets.map((t) =>
-        t.id === id && !t.phoneLocked
-          ? { ...t, contactPhone: phone }
-          : t
-      )
-    );
-  };
-
   return (
-    <div className={style["tickets-container"]}>
+     <>
+          {/* ✅ Navbar at the top */}
+          <Navbar />
+    <div className={styles.container}>
       <h2>Support Tickets</h2>
-
-      {/* إضافة تذكرة جديدة */}
-      <div className={style["new-ticket"]}>
-        <input
-          value={newSubject}
-          onChange={(e) => setNewSubject(e.target.value)}
-          placeholder="Enter subject..."
-        />
-        <input
-          value={newPhone}
-          onChange={(e) => setNewPhone(e.target.value)}
-          placeholder="Enter number or Email"
-        />
-        <button onClick={addTicket}>Add Ticket</button>
-      </div>
-
-      {/* جدول التذاكر */}
-      <table>
+      <button
+        className={styles.newTicketButton}
+        onClick={() => navigate("/SubmitRequest")}
+      >
+        New Ticket
+      </button>
+      <table className={styles.table}>
         <thead>
           <tr>
             <th>Ticket ID</th>
             <th>Subject</th>
+            <th>Category</th>
             <th>Status</th>
             <th>Date Submitted</th>
-            <th>Contact</th>
-            <th>Action</th>
+            <th>Last Update</th>
+            <th>Priority</th>
           </tr>
         </thead>
         <tbody>
           {tickets.map((ticket) => (
             <tr key={ticket.id}>
-              <td>#{ticket.id}</td>
+              <td>{ticket.id}</td>
               <td>{ticket.subject}</td>
+              <td>{ticket.category}</td>
               <td>
-                <span
-                  className={
-                    ticket.status === "Resolved"
-                      ? style.Resolved
-                      : style["InProgress"]
-                  }
-                >
+                <span className={`${styles.status} ${getStatusClass(ticket.status)}`}>
                   {ticket.status}
                 </span>
               </td>
               <td>{ticket.dateSubmitted}</td>
-              <td>
-                <input
-                  value={ticket.contactPhone}
-                  onChange={(e) => updatePhone(ticket.id, e.target.value)}
-                  placeholder="Enter phone..."
-                  disabled={ticket.phoneLocked}
-                />
-              </td>
-              <td>
-                <button
-                  onClick={() => markResolved(ticket.id)}
-                  disabled={ticket.status === "Resolved"}
-                >
-                  Done
-                </button>
-              </td>
+              <td>{ticket.lastUpdate}</td>
+              <td>{ticket.priority}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
+    </>
   );
-}
+};
+
+export default SupportTickets;
