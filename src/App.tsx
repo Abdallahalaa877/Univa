@@ -1,27 +1,28 @@
-import { useState } from "react";
-import Navbar from "./component/Navbar/navBar";
-import SupportTicket  from "./SupportTicket/supportTicket";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "../src/component/Navbar/navBar";
+import Home from "./Home/home";
 import Courses from "./Courses/Courses";
-import CourseDetails from "./CourseDetails/CourseDetails";
-import StudentProfile from "./StudentProfile/StudentProfile";
-import SubmitRequest from "./SubmitRequest/SubmitRequest";
+import Enroll from "./Enrollment/Enrollment";
 import Grades from "./Grades/Grades";
-import Enrollment from "./Enrollment/Enrollment";
-import Login from "./login/login";
-import Home from"./Home/home";
-
-export default function App() {
-  const [showLogin, setShowLogin] = useState(false);
-
+import Support from "./SupportTicket/supportTicket";
+import Profile from "./StudentProfile/StudentProfile";
+const App: React.FC = () => {
   return (
-    <><Navbar/>
-     <Home/>
-    <SupportTicket/>
-    <CourseDetails/>
-    <Courses/>
-    <StudentProfile/>
-    <Grades/>
-    <Home/>
-  </>
+    <Router>
+      <Navbar />
+      <div style={{ padding: "20px" }}>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/enroll" element={<Enroll />} />
+          <Route path="/grades" element={<Grades />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
+
+export default App;

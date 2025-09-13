@@ -1,10 +1,16 @@
 import { useState } from "react";
 import s from "./login.module.css";
+import Navbar from "../component/Navbarforlogin/navBar";
 
 export default function Login() {
   const [show, setShow] = useState(false);
 
   return (
+    <>
+    {}
+    <Navbar onLoginClick={function (): void {
+        throw new Error("Function not implemented.");
+      } }/>
     <section className={s.wrapper}>
       <div className={s.card}>
         <h1 className={s.title}>Welcome back</h1>
@@ -48,5 +54,7 @@ export default function Login() {
         </form>
       </div>
     </section>
+    </>
+
   );
 }

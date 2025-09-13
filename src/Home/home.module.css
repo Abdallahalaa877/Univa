@@ -1,128 +1,290 @@
-.page {
-  max-width: 100%; /* اوسع عشان الصفحة تاخد شكل كامل */
-  margin: 20px auto;
-  font-family: system-ui, sans-serif;
-  color: #0c141c;
-  
+.dashboard {
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-/* Banner */
-.banner {
-  background: #0f766e;
+.hero {
+  background: #00695c;
   color: white;
-  padding: 24px;
+  padding: 20px;
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.banner h2 {
-  margin: 0;
-}
-.bannerBtn {
-  background: white;
-  color: #0f766e;
-  font-weight: 600;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* Search */
-.searchBox {
-  margin: 20px 0;
-}
-.searchBox input {
-  width: 96%;
-  padding: 12px 14px;
-  
-  border-radius: 8px;
-  border: 1px solid #d8dee5;
-  background: #f7f9fc;
-  font-size: 14px;
-  display: block;
-}
-
-/* Filters */
-.filters {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
   margin-bottom: 20px;
 }
-.filterBtn {
+
+.heroButton {
+  background: white;
+  color: #00695c;
   border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  background: #f1f5f9;
+  padding: 10px 20px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-weight: bold;
 }
-.filterBtn.active {
-  background: #0f766e;
+
+.main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.search {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  border: none;
+  background: #f5f5f5;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.activeTab {
+  background: #00695c;
   color: white;
 }
 
-/* Cards */
-.card {
+.cards {
   display: flex;
-  gap: 16px;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.card {
   background: #fff;
-  border: 1px solid #d8dee5;
   border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 16px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
-.imagePlaceholder {
-  width: 80px;
-  height: 80px;
-  border-radius: 8px;
-  background: #e2e8f0;
+.event {
+  border-left: 6px solid #00695c;
 }
 
-.cardBody h3 {
-  margin: 0 0 6px;
-  /* padding-left: 25px; */
-  font-size: 16px;
-  text-align: left;
-}
-.cardBody p {
-  margin: 0;
-  font-size: 14px;
-  color: #444;
+.announcement {
+  border-left: 6px solid #ffa000;
 }
 
-/* Badges */
-.badgeEvent,
-.badgeAnnouncement,
-.badgeDeadline,
-.badgeResource {
+.tag {
   position: absolute;
-  right: 16px;
-  top: 16px;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 6px;
+  top: 10px;
+  right: 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #666;
 }
 
-.badgeEvent {
-  background: #e6f4ef;
-  color: #0f766e;
+/* Sidebar sections */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
 }
-.badgeAnnouncement {
-  background: #e5f0fb;
-  color: #2563eb;
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.badgeDeadline {
-  background: #fef3c7;
-  color: #b45309;
+
+.sectionHeader h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0d141c;
 }
-.badgeResource {
-  background: #ede9fe;
-  color: #6d28d9;
+
+.arrow {
+  font-size: 18px;
+  transform: rotate(-180deg);
+  cursor: pointer;
+}
+
+/* Deadline cards */
+.deadlineCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7fafa;
+  border-radius: 12px;
+  padding: 20px 16px;
+}
+
+.primaryCard {
+  background: #016a69;
+  color: white;
+}
+
+.deadlineLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.day {
+  font-size: 36px;
+  font-weight: 500;
+}
+
+.deadlineTitle {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.deadlineSubtitle {
+  font-size: 14px;
+  color: #979797;
+}
+
+.primaryCard .deadlineTitle,
+.primaryCard .deadlineSubtitle {
+  color: #fff;
+}
+
+.primaryCard .deadlineSubtitle {
+  color: #cfebdf;
+}
+
+.deadlineTime {
+  font-size: 16px;
+  color: #ffbb00;
+  font-weight: 500;
+}
+
+.deadlineTimeAlt {
+  font-size: 16px;
+  color: #016a69;
+  font-weight: 500;
+}
+
+/* Event cards */
+.eventCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #016a69;
+  border-radius: 12px;
+  padding: 20px 16px;
+}
+.eventCard1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7fafa;
+  border-radius: 12px;
+  padding: 20px 16px;
+}
+.eventLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.iconBox {
+  background: #f7fafa;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.primaryCard .iconBox {
+  background: #f7fafa;
+  color: #016a69;
+}
+
+.iconBoxAlt {
+  background: #016a69;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.eventTitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: #f7fafc;
+}
+
+.eventSubtitle {
+  font-size: 14px;
+  color: #cfebdf;
+}
+
+.eventTitleAlt {
+  font-size: 16px;
+  font-weight: 500;
+  color: #0d141c;
+}
+
+.eventSubtitleAlt {
+  font-size: 14px;
+  color: #4f7396;
+}
+
+.eventTime {
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffbb00;
+}
+
+.eventTimeAlt {
+  font-size: 16px;
+  font-weight: 500;
+  color: #016a69;
+}
+
+/* Quick Links */
+.linksHeader {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0d141c;
+}
+
+.linkItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f7fafa;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.linkIcon {
+  background: #e8edf2;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deadline {
+  border-left: 6px solid #d32f2f;
+}
+
+.resource {
+  border-left: 6px solid #1976d2;
 }
