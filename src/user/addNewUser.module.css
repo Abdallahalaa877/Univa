@@ -1,0 +1,76 @@
+.addUserPage {
+  padding: 2rem;
+  flex: 1;
+  background: #fff;
+  border-radius: 8px;
+  min-height: 100vh;
+}
+
+.addUserPage h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #111827;
+}
+
+/* Form styling */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+}
+
+.form input,
+.form select {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.form input:focus,
+.form select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* Actions (Cancel + Save buttons) */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cancel {
+  background: #f3f4f6;
+  color: #111827;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cancel:hover {
+  background: #e5e7eb;
+}
+
+.save {
+  background: #047857;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.save:hover {
+  background: #065f46;
+}

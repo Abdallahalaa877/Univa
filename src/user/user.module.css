@@ -1,0 +1,92 @@
+.usersPage {
+  padding: 20px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.addUserBtn {
+  background-color: #006d5b;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.addUserBtn:hover {
+  background-color: #004f42;
+}
+
+.searchBar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.searchBar input,
+.searchBar select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  flex: 1;
+}
+
+.usersTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.usersTable th,
+.usersTable td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.usersTable th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.editBtn {
+  background: #006d5b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.editBtn:hover {
+  background: #004f42;
+}
+
+.deleteBtn {
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background: #c9302c;
+}
+
+.noData {
+  text-align: center;
+  padding: 15px;
+  color: #777;
+}

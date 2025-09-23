@@ -1,0 +1,89 @@
+.createAnnouncement {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Tabs (Announcement & Event) */
+.tabButtons {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.tabButtons button {
+  flex: 1;
+  padding: 10px 18px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.tabButtons button:hover {
+  background: #f3f4f6;
+}
+
+.activeTab {
+  background: #065f46 !important;
+  color: #fff !important;
+  border-color: #065f46 !important;
+}
+
+/* Form Fields */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form input,
+.form textarea,
+.form select {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Action Buttons */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.cancel {
+  background: #e5e7eb;
+  color: #111827;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cancel:hover {
+  background: #d1d5db;
+}
+
+.post {
+  background: #065f46;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.post:hover {
+  background: #064e3b;
+}

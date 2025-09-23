@@ -12,6 +12,12 @@ import Login from "./login/login";
 import Home from"./Home/home";
 import Schedule from "./Schedule/Schedule"
 import "./index.css";
+import AdminDashboard from "./admin/dashboard";
+import Announcement from './Announcement/announcement'
+import Users from './user/user'
+import AddNewUser from './user/addNewUser'
+import CoursesForAdmin from './Course/Courses'
+import AddNewCourseForAdmin from './Course/addNewCourse'
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -28,7 +34,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
          <Route path="/enroll" element={<Enrollment />} />
           <Route path="/support" element={<SupportTicket />} />
           <Route path="/Schedule" element={<Schedule />} />
-
+  <Route path="/admin" element={<AdminDashboard />} />
+  <Route path="/announcement" element={<Announcement />} />
+<Route path="/announcement/edit/:id" element={<Announcement/>} />
+        <Route path="/users" element={<Users/>} /> {/* ✅ Add Users route */}
+        <Route path="/addnew" element={<AddNewUser/>} /> {/* ✅ Add Users route */}
+        <Route path="/coursesAdmin" element={<CoursesForAdmin/>} /> {/* ✅ Add Users route */}
+        <Route path="/addnewcourse" element={<AddNewCourseForAdmin/>} /> ✅ Add Users route
+        <Route path="/courses/edit/:id" element={<AddNewCourseForAdmin/>} /> ✅ Add Users route
 
 
       </Routes>

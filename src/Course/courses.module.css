@@ -1,0 +1,59 @@
+.coursesPage {
+  flex: 1;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.addCourseBtn {
+  background: #00695c;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.addCourseBtn:hover {
+  background: #004d40;
+}
+
+.coursesTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.coursesTable th,
+.coursesTable td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.noData {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}
+
+.editBtn {
+  color: #007bff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.deleteBtn {
+  color: #f44336;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
