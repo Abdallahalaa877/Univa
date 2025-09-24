@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios, { AxiosError } from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import Sidebar from "../sidebar/sidebar";
 import styles from "./addNewCourse.module.css";
-
 interface CourseForm {
   course_code: string;
   course_name: string;
@@ -12,7 +11,7 @@ interface CourseForm {
 }
 
 const AddOrEditCourse: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { id } = useParams<{ id: string }>(); // 👈 detect if editing
   const token = localStorage.getItem("token");
 
@@ -81,9 +80,7 @@ const AddOrEditCourse: React.FC = () => {
         });
       }
 
-      // 👇 if you want to go back to list after save/update
-    //   navigate("/courses");
-      // ❌ if you want to stay on same page, comment the line above
+  
     } catch (error) {
       const err = error as AxiosError<{ error?: string }>;
       console.error("❌ Error saving course:", err.response?.data || err.message);

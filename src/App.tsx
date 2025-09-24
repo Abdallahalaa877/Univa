@@ -4,7 +4,7 @@ import Navbar from "../src/component/Navbar/navBar";
 import Home from "./Home/home";
 import Courses from "./Courses/Courses";
 import Enroll from "./Enrollment/Enrollment";
-import Grades from "./Grades/Grades";
+import Grades from "./admin/Grades/Grades";
 import Support from "./SupportTicket/supportTicket";
 import Profile from "./StudentProfile/StudentProfile";
 import CourseDetails from "./CourseDetails/CourseDetails";

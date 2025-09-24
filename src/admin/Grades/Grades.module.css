@@ -1,0 +1,87 @@
+.uploadPage {
+  flex: 1;
+  padding: 2rem;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.uploadPage h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #1a1a1a;
+}
+
+.uploadPage p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.form {
+  max-width: 600px;
+}
+
+.uploadBox {
+  margin-bottom: 2rem;
+}
+
+.dropArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  color: #64748b;
+  font-size: 0.95rem;
+  background-color: #f9fafb;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.dropArea:hover {
+  border-color: #059669; /* teal green */
+  background-color: #f0fdf4;
+  color: #065f46;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.cancel,
+.upload {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.cancel {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
+.cancel:hover {
+  background-color: #e2e8f0;
+}
+
+.upload {
+  background-color: #047857; /* teal green */
+  color: #fff;
+}
+
+.upload:hover {
+  background-color: #065f46;
+}
+
+.upload:active,
+.cancel:active {
+  transform: scale(0.97);
+}

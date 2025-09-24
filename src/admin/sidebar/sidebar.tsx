@@ -45,26 +45,33 @@ const Sidebar: React.FC = () => {
           Grades
         </Link>
         <Link
-          to="/support"
+          to="/SupportTicket"
           className={`${styles.navItem} ${
-            location.pathname === "/support" ? styles.active : ""
+            location.pathname === "/SupportTicket" ? styles.active : ""
           }`}
         >
           Support Tickets
         </Link>
-       
+            <Link
+          to="/coursesection"
+          className={`${styles.navItem} ${
+            location.pathname === "/coursesection" ? styles.active : ""
+          }`}
+        >
+          Course Section
+        </Link>
       </nav>
 
       {/* Footer */}
       <div className={styles.footer}>
-        <Link
+        {/* <Link
           to="/profile"
           className={`${styles.navItem} ${
             location.pathname === "/profile" ? styles.active : ""
           }`}
         >
           Profile
-        </Link>
+        </Link> */}
         <Link
           to="/logout"
           className={`${styles.navItem} ${
