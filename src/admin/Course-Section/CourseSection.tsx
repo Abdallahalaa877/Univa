@@ -26,9 +26,12 @@ course_name: string;
 }
 
 interface FacultyUser {
-id: number;
-name: string;
+  faculty: any;
+  faculty_id: number;
+  name: string;
+  username?: string; // optional if backend returns it
 }
+
 
 const AddCourseSection: React.FC = () => {
 const navigate = useNavigate();
