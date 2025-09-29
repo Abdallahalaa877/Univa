@@ -7,7 +7,7 @@ import StudentProfile from "./StudentProfile/StudentProfile";
 import SubmitRequest from "./SubmitRequest/SubmitRequest";
 import Grades from "./admin/Grades/Grades";
 import Enrollment from "./Enrollment/Enrollment";
-// import SupportTicket from "./SupportTicket/supportTicket";
+import SupportTicket from "./SupportTicket/supportTicket";
 import Login from "./login/login";
 import Home from"./Home/home";
 import Schedule from "./Schedule/Schedule"
@@ -18,7 +18,7 @@ import Users from './admin/user/user'
 import AddNewUser from './admin/user/addNewUser'
 import CoursesForAdmin from './admin/Course/Courses'
 import AddNewCourseForAdmin from './admin/Course/addNewCourse'
-import SupportTicket  from './admin/SupportTicket/SupportTicket'
+import AdminSupportTicket  from './admin/SupportTicket/SupportTicket'
 import LogOut  from './logout/logout'
 import CourseSection  from './admin/Course-Section/CourseSection'
 
@@ -46,6 +46,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/addnewcourse" element={<AddNewCourseForAdmin/>} /> ✅ Add Users route
         <Route path="/courses/edit/:id" element={<AddNewCourseForAdmin/>} /> ✅ Add Users route
         <Route path="/SupportTicket" element={<SupportTicket/>} /> ✅ Add Users route
+        <Route path="/Ticket" element={<AdminSupportTicket/>} /> ✅ Add Users route
         <Route path="/logout" element={<LogOut/>} /> ✅ Add Users route
         <Route path="/coursesection" element={<CourseSection/>} /> ✅ Add Users route
 
