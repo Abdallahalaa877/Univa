@@ -11,8 +11,9 @@ type Grade = {
   AlphaGrade: string | null;
   graded_date: string | null;
   enrollment_id: number;
-  course_code?: string;
-  section_number?: string;
+  course_code: string;
+  section_number: string;
+  course_name: string; // added course_name
 };
 
 export default function GradesPage() {
@@ -33,7 +34,7 @@ export default function GradesPage() {
     let studentId: string;
     try {
       const user = JSON.parse(userRaw);
-      studentId = user.username;
+      studentId = user.username; // use username as student ID
     } catch (err) {
       setError("Failed to parse user info.");
       setLoading(false);
@@ -41,27 +42,33 @@ export default function GradesPage() {
     }
 
     const fetchGrades = async () => {
+        
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8000/api/course/all-enrollments/${studentId}`,
+          `http://127.0.0.1:8000/api/course/grades/student/${studentId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
         if (res.data && Array.isArray(res.data.data)) {
-          // Map API response to Grade[]
-          const mapped: Grade[] = res.data.data.map((item: any) => ({
-            enrollment_id: item.enrollment_id,
-            section_id: item.section_id,
-            student_id: item.student_id,
-            result: item.result,
-            points_earned: item.result, // or any points
-            AlphaGrade: item.final_grade,
-            graded_date: item.grading_date || null,
-            course_code: item.course_section?.course?.course_code,
-            section_number: item.course_section?.section_number,
-          }));
+            console.log(res.data.data);
+            
+         const mapped: Grade[] = res.data.data.map((item: any) => ({
+  enrollment_id: item.enrollment_id,
+  section_id: item.section_id,
+  student_id: item.student_id,
+  result: item.result,
+  points_earned: item.result,
+  AlphaGrade: item.final_grade,
+  graded_date: item.grading_date || null,
+  course_code: item.course_section?.course?.course_code,
+  section_number: item.course_section?.section_number,
+  course_name: item.course_section?.course?.course_name, // <-- add this
+}));
+
 
           setGrades(mapped);
+          console.log(mapped);
+          
         } else {
           setGrades([]);
         }
@@ -90,17 +97,16 @@ export default function GradesPage() {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>Section</th>
-              <th>Student ID</th>
+              <th>Course</th>
+              
               <th>Result</th>
-              <th>Points Earned</th>
               <th>Alpha Grade</th>
-              <th>Graded Date</th>
             </tr>
           </thead>
           <tbody>
             {grades.length > 0 ? (
               grades.map((g, i) => {
+                
                 const isGradProject =
                   g.course_code === "CS99" || g.section_number === "GradProject";
                 return (
@@ -111,16 +117,10 @@ export default function GradesPage() {
                       fontWeight: isGradProject ? "bold" : "normal",
                     }}
                   >
-                    <td>{g.section_number || g.section_id}</td>
-                    <td>{g.student_id}</td>
+                    <td>{g.course_name }</td>
                     <td>{g.result ?? "-"}</td>
-                    <td>{g.points_earned ?? "-"}</td>
                     <td>{g.AlphaGrade ?? "-"}</td>
-                    <td>
-                      {g.graded_date
-                        ? new Date(g.graded_date).toLocaleDateString()
-                        : "-"}
-                    </td>
+                   
                   </tr>
                 );
               })
