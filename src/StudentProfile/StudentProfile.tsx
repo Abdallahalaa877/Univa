@@ -6,7 +6,7 @@ import Navbar from "../component/Navbar/navBar";
 const StudentProfile: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState({
-    id: "20220202",
+    id: "20250004",
     level: "Fourth Level",
     gpa: "3.06",
     program: "Information System",

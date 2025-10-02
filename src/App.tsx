@@ -22,7 +22,7 @@ const App: React.FC = () => {
           <Route path="/enroll" element={<EnrollmentPage />} />
           <Route path="/grades" element={<Grades />} />
           <Route path="/support" element={<Support />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<StudentProfile />} />
            <Route path="/coursedetails" element={<CourseDetails />} />
         </Routes>
       </div>
