@@ -1,9 +1,15 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Sidebar from "../sidebar/sidebar";
 import styles from "./Grades.module.css";
 
 const UploadGrades: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  // TODO: make this dynamic, for now hardcoded example
+  const courseSectionId = 1; // replace with real sectionId
+  // const assignmentId = 5; // if uploading assignment grades as faculty
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -11,15 +17,40 @@ const UploadGrades: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!file) {
-      alert("Please upload a CSV file first.");
+      alert("⚠️ Please upload a CSV file first.");
       return;
     }
-    // TODO: send file to backend with FormData
-    console.log("Uploading file:", file);
-    alert("✅ File uploaded successfully!");
+
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      // 🔹 Admin endpoint for course grades
+      const res = await axios.post(
+        `http://127.0.0.1:8000/api/course/grades/${courseSectionId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("✅ Upload success:", res.data);
+      alert("✅ Grades uploaded successfully!");
+    } catch (err: any) {
+      console.error("❌ Upload failed:", err.response?.data || err.message);
+      alert("❌ Failed to upload grades. Check console for details.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -31,16 +62,13 @@ const UploadGrades: React.FC = () => {
       <div className={styles.uploadPage}>
         <h2>Upload Grades</h2>
         <p>
-          Upload grades for the selected course. Ensure the file is in CSV
-          format and contains the required fields.
+          Upload grades for the selected course. Ensure the file is in{" "}
+          <b>CSV format</b> and contains the required fields.
         </p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.uploadBox}>
-            <label
-              htmlFor="fileUpload"
-              className={styles.dropArea}
-            >
+            <label htmlFor="fileUpload" className={styles.dropArea}>
               {file ? (
                 <span>{file.name}</span>
               ) : (
@@ -57,11 +85,16 @@ const UploadGrades: React.FC = () => {
           </div>
 
           <div className={styles.actions}>
-            <button type="button" className={styles.cancel}>
+            <button
+              type="button"
+              className={styles.cancel}
+              onClick={() => setFile(null)}
+              disabled={loading}
+            >
               Cancel
             </button>
-            <button type="submit" className={styles.upload}>
-              Upload
+            <button type="submit" className={styles.upload} disabled={loading}>
+              {loading ? "Uploading..." : "Upload"}
             </button>
           </div>
         </form>

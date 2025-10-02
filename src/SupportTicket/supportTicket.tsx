@@ -90,7 +90,6 @@ const SupportTickets: React.FC = () => {
                 <th>Category</th>
                 <th>Status</th>
                 <th>Date Submitted</th>
-                <th>Priority</th>
               </tr>
             </thead>
             <tbody>
@@ -107,7 +106,6 @@ const SupportTickets: React.FC = () => {
                     </span>
                   </td>
                   <td>{new Date(ticket.created_at).toLocaleDateString()}</td>
-                  <td>{ticket.priority}</td>
                 </tr>
               ))}
             </tbody>

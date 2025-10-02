@@ -111,39 +111,6 @@ const SubmitRequest: React.FC = () => {
             ></textarea>
           </div>
 
-          {/* Attachment */}
-          <div className={styles.formGroup}>
-            <label className={styles.label}>
-              Attachment <span className={styles.attachmentNote}>(optional)</span>
-            </label>
-            <input
-              type="file"
-              className={styles.input}
-              onChange={(e) =>
-                setAttachment(e.target.files ? e.target.files[0] : null)
-              }
-            />
-          </div>
-
-          {/* Priority */}
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Priority</label>
-            <div className={styles.priorityGroup}>
-              {["Low", "Medium", "High"].map((level) => (
-                <button
-                  type="button"
-                  key={level}
-                  className={`${styles.priorityButton} ${
-                    priority === level ? styles.active : ""
-                  }`}
-                  onClick={() => setPriority(level)}
-                >
-                  {level}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Submit */}
           <button
             type="submit"
