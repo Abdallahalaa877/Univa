@@ -6,48 +6,82 @@ import Navbar from "../component/Navbar/navBar";
 type Grade = {
   section_id: number;
   student_id: string;
-  result: string;
-  points_earned: number;
-  AlphaGrade: string;
-  graded_date: string;
+  result: string | null;
+  points_earned: number | null;
+  AlphaGrade: string | null;
+  graded_date: string | null;
   enrollment_id: number;
+  course_code?: string;
+  section_number?: string;
 };
 
 export default function GradesPage() {
   const [grades, setGrades] = useState<Grade[]>([]);
   const [loading, setLoading] = useState(true);
-
-  const token = localStorage.getItem("token");
-  const studentId = localStorage.getItem("studentId"); // ✅ must be stored when login
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userRaw = localStorage.getItem("user");
+
+    if (!token || !userRaw) {
+      setError("User not logged in or token missing.");
+      setLoading(false);
+      return;
+    }
+
+    let studentId: string;
+    try {
+      const user = JSON.parse(userRaw);
+      studentId = user.username;
+    } catch (err) {
+      setError("Failed to parse user info.");
+      setLoading(false);
+      return;
+    }
+
     const fetchGrades = async () => {
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8000/api/course/grades/student/${studentId}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
+          `http://127.0.0.1:8000/api/course/all-enrollments/${studentId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        // backend returns { success, grades: [...] }
-        setGrades(res.data.grades || []);
-      } catch (err) {
-        console.error("❌ Error fetching grades:", err);
+        if (res.data && Array.isArray(res.data.data)) {
+          // Map API response to Grade[]
+          const mapped: Grade[] = res.data.data.map((item: any) => ({
+            enrollment_id: item.enrollment_id,
+            section_id: item.section_id,
+            student_id: item.student_id,
+            result: item.result,
+            points_earned: item.result, // or any points
+            AlphaGrade: item.final_grade,
+            graded_date: item.grading_date || null,
+            course_code: item.course_section?.course?.course_code,
+            section_number: item.course_section?.section_number,
+          }));
+
+          setGrades(mapped);
+        } else {
+          setGrades([]);
+        }
+      } catch (err: any) {
+        console.error("❌ Error fetching grades:", err.response || err);
+        setError("Failed to fetch grades. Please try again.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchGrades();
-  }, [studentId, token]);
+  }, []);
 
   if (loading) return <p>Loading grades...</p>;
+  if (error) return <p className={styles.error}>{error}</p>;
 
   return (
     <>
       <Navbar />
-
       <div className={styles.container}>
         <div className={styles.header}>
           <h1>My Grades</h1>
@@ -66,16 +100,30 @@ export default function GradesPage() {
           </thead>
           <tbody>
             {grades.length > 0 ? (
-              grades.map((g, i) => (
-                <tr key={i}>
-                  <td>{g.section_id}</td>
-                  <td>{g.student_id}</td>
-                  <td>{g.result}</td>
-                  <td>{g.points_earned}</td>
-                  <td>{g.AlphaGrade}</td>
-                  <td>{new Date(g.graded_date).toLocaleDateString()}</td>
-                </tr>
-              ))
+              grades.map((g, i) => {
+                const isGradProject =
+                  g.course_code === "CS99" || g.section_number === "GradProject";
+                return (
+                  <tr
+                    key={i}
+                    style={{
+                      backgroundColor: isGradProject ? "#fff4e5" : "transparent",
+                      fontWeight: isGradProject ? "bold" : "normal",
+                    }}
+                  >
+                    <td>{g.section_number || g.section_id}</td>
+                    <td>{g.student_id}</td>
+                    <td>{g.result ?? "-"}</td>
+                    <td>{g.points_earned ?? "-"}</td>
+                    <td>{g.AlphaGrade ?? "-"}</td>
+                    <td>
+                      {g.graded_date
+                        ? new Date(g.graded_date).toLocaleDateString()
+                        : "-"}
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td colSpan={6} style={{ textAlign: "center" }}>

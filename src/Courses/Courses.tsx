@@ -15,6 +15,8 @@ interface Course {
   days?: string;
   time?: string;
   location?: string;
+  grade?: number | null;
+  current_enrollment?: number;
 }
 
 // ------------------ Calendar Component ------------------
@@ -100,7 +102,11 @@ const Calendar: React.FC<{ deadlines: any[] }> = ({ deadlines }) => {
 // ------------------ Main Page ------------------
 const Courses: React.FC = () => {
   const navigate = useNavigate();
-  const [courses, setCourses] = useState<Course[]>([]);
+  const [allCourses, setAllCourses] = useState<Course[]>([]);
+  const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
+  const [activeTab, setActiveTab] = useState<"current" | "completed" | "all">(
+    "current"
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -120,22 +126,21 @@ const Courses: React.FC = () => {
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        // Map API response to Course interface
-        const fetchedCourses: Course[] = res.data.data.map(
-          (item: any) => ({
-            id: item.section_id,
-            code: item.course.course_code,
-            title: item.course.course_name,
-            professor: item.faculty_id.toString(),
-            credit: item.course.credit_hours + " Hr",
-            dep: "N/A",
-            days: "",
-            time: "",
-            location: "",
-          })
-        );
+        const fetchedCourses: Course[] = res.data.data.map((item: any) => ({
+          id: item.section_id,
+          code: item.course.course_code,
+          title: item.course.course_name,
+          professor: item.faculty_id.toString(),
+          credit: item.course.credit_hours + " Hr",
+          dep: "N/A",
+          days: "",
+          time: "",
+          location: "",
+          grade: item.grade || null,
+          current_enrollment: item.current_enrollment,
+        }));
 
-        setCourses(fetchedCourses);
+        setAllCourses(fetchedCourses);
         setLoading(false);
       } catch (err) {
         console.error(err);
@@ -146,6 +151,21 @@ const Courses: React.FC = () => {
 
     fetchCourses();
   }, []);
+
+  // Filter courses when tab or allCourses change
+  useEffect(() => {
+    let filtered: Course[] = [];
+    if (activeTab === "current") {
+      filtered = allCourses.filter(
+        (c) => !c.grade || c.grade === 0
+      );
+    } else if (activeTab === "completed") {
+      filtered = allCourses.filter((c) => c.grade && c.grade > 0);
+    } else {
+      filtered = allCourses;
+    }
+    setFilteredCourses(filtered);
+  }, [activeTab, allCourses]);
 
   return (
     <>
@@ -163,16 +183,31 @@ const Courses: React.FC = () => {
             </button>
           </div>
           <div className={styles.tabs}>
-            <span className={styles.active}>Current</span>
-            <span>All</span>
-            <span>Completed</span>
+            <span
+              className={activeTab === "current" ? styles.active : ""}
+              onClick={() => setActiveTab("current")}
+            >
+              Current
+            </span>
+            <span
+              className={activeTab === "all" ? styles.active : ""}
+              onClick={() => setActiveTab("all")}
+            >
+              All
+            </span>
+            <span
+              className={activeTab === "completed" ? styles.active : ""}
+              onClick={() => setActiveTab("completed")}
+            >
+              Completed
+            </span>
           </div>
 
           <div className={styles.coursesList}>
             {loading && <p>Loading courses...</p>}
             {error && <p className={styles.error}>{error}</p>}
             {!loading &&
-              courses.map((c) => (
+              filteredCourses.map((c) => (
                 <div
                   key={c.id}
                   className={styles.courseCard}
