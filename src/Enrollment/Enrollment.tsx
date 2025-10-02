@@ -4,90 +4,105 @@ import Navbar from "../component/Navbar/navBar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-interface Course {
+interface CourseSection {
   id: number;
-  code: string;
+  section_number: string;
+  course_code: string;
   title: string;
-  instructor: string;
   credit: number;
-  department: string;
-  days: string;
-  time: string;
-  location: string;
-  term: string; // comes from backend
-}
-
-interface AcademicTerm {
-  id: number;
-  name: string; // example: "Spring 2025"
+  instructor: string;
+  term: string;
 }
 
 const EnrollmentPage: React.FC = () => {
-  const [enrolled, setEnrolled] = useState<Course[]>([]);
+  const [enrolled, setEnrolled] = useState<CourseSection[]>([]);
+  const [sections, setSections] = useState<CourseSection[]>([]);
   const [success, setSuccess] = useState(false);
-  const [selectedTerm, setSelectedTerm] = useState<string>("");
-  const [terms, setTerms] = useState<AcademicTerm[]>([]);
-  const [courses, setCourses] = useState<Course[]>([]);
-
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  // Fetch academic terms from backend
+  // Fetch available sections
+  const fetchSections = async () => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await axios.get(
+        "http://127.0.0.1:8000/api/course/enrollments",
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      
+      // Map backend response to CourseSection interface
+      const mappedSections = res.data.data.map((s: any) => ({
+        id: s.section_id,
+        section_number: s.section_number,
+        course_code: s.course.course_code,
+        title: s.course.course_name,
+        credit: s.course.credit_hours,
+        instructor: `Faculty ID: ${s.faculty_id}`,
+        term: s.term.term_name,
+      }));
+
+      setSections(mappedSections);
+      console.log(sections);
+      
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      console.error(err);
+      setError("Failed to load course sections. Please try again.");
+    }
+  };
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios
-      .get("http://127.0.0.1:8000/api/academic-terms", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setTerms(res.data);
-        if (res.data.length > 0) {
-          setSelectedTerm(res.data[0].name); // default first term
-        }
-      })
-      .catch((err) => console.error("Error fetching academic terms:", err));
+    fetchSections();
   }, []);
 
-  // Fetch courses when term changes
-  useEffect(() => {
-    if (!selectedTerm) return;
-    const token = localStorage.getItem("token");
-    axios
-      .get("http://127.0.0.1:8000/api/courses", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        // Filter by selected term
-        const filtered = res.data.filter(
-          (course: Course) => course.term === selectedTerm
-        );
-        setCourses(filtered);
-      })
-      .catch((err) => console.error("Error fetching courses:", err));
-  }, [selectedTerm]);
-
-  const toggleEnroll = (course: Course) => {
-    if (enrolled.some((c) => c.id === course.id)) {
-      setEnrolled(enrolled.filter((c) => c.id !== course.id)); // Drop
+  // Toggle enrollment for a section
+  const toggleEnroll = (section: CourseSection) => {
+    if (enrolled.some((c) => c.id === section.id)) {
+      setEnrolled(enrolled.filter((c) => c.id !== section.id));
     } else {
-      setEnrolled([...enrolled, course]); // Enroll
+      setEnrolled([...enrolled, section]);
     }
   };
 
-  const handleSubmit = () => {
-    if (enrolled.length > 0) {
-      const token = localStorage.getItem("token");
-      axios
-        .post(
-          "http://127.0.0.1:8000/api/course/enrollments",
-          { courses: enrolled.map((c) => c.id) }, // send only course IDs
-          { headers: { Authorization: `Bearer ${token}` } }
-        )
-        .then(() => {
-          setSuccess(true);
-        })
-        .catch((err) => console.error("Error submitting enrollment:", err));
+  // Submit enrolled sections
+  const handleSubmit = async () => {
+  if (enrolled.length === 0) return;
+console.log(localStorage.getItem("token"));
+  try {
+    const token = localStorage.getItem("token");
+const user = localStorage.getItem("user");
+    if (!user) {
+      setError("User not found. Please log in again.");
+      return;
     }
-  };
+    const student_id = Number(JSON.parse(user).username); 
+
+    const payload = {
+      enrolments: enrolled.map((section) => ({
+        student_id,
+        section_id: section.id,
+      })),
+    };
+
+    console.log("Submitting payload:", payload); // <-- log payload
+
+    const res = await axios.post(
+      "http://127.0.0.1:8000/api/course/enrollments",
+      payload,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    console.log("Response:", res.data);
+    setSuccess(true);
+  } catch (err: any) {
+    console.error("Enrollment failed:", err.response?.data || err.message);
+    setError("Failed to submit enrollment. Please try again.");
+  }
+};
+
 
   const handleViewSchedule = () => {
     navigate("/schedule");
@@ -99,78 +114,69 @@ const EnrollmentPage: React.FC = () => {
     <>
       <Navbar />
       <div className={styles.container}>
-        {/* Left side - Available Courses */}
+        {/* Left side - Available Sections */}
         <div className={styles.coursesList}>
           <h2>Course Enrollment</h2>
-          <p>Browse and enroll in courses for the upcoming semester.</p>
+          <p>Browse and enroll in available course sections.</p>
 
-          {/* Semester Dropdown */}
-          <select
-            className={styles.select}
-            value={selectedTerm}
-            onChange={(e) => setSelectedTerm(e.target.value)}
-          >
-            {terms.map((term) => (
-              <option key={term.id} value={term.name}>
-                {term.name}
-              </option>
-            ))}
-          </select>
+          {error && <p className={styles.error}>{error}</p>}
+          {loading && <p>Loading...</p>}
 
-          {courses.map((course) => {
-            const isEnrolled = enrolled.some((c) => c.id === course.id);
+          {!loading &&
+            sections.map((section) => {
+              const isEnrolled = enrolled.some((c) => c.id === section.id);
+              return (
+                <div key={section.id} className={styles.courseCard}>
+                  <div className={styles.courseInfo}>
+                    <span className={styles.courseCode}>
+                      Course code: {section.course_code}
+                    </span>
+                    <h3>{section.title}</h3>
+                    <p>
+                      {section.instructor} | Credit: {section.credit} Hr
+                    </p>
+                    <p>Section: {section.section_number} | Term: {section.term}</p>
+                  </div>
 
-            return (
-              <div key={course.id} className={styles.courseCard}>
-                <div className={styles.courseInfo}>
-                  <span className={styles.courseCode}>
-                    Course code: {course.code}
-                  </span>
-                  <h3>{course.title}</h3>
-                  <p>
-                    {course.instructor} | Credit: {course.credit} Hr | Dep:{" "}
-                    {course.department}
-                  </p>
-                  <p>
-                    {course.days} | {course.time}
-                  </p>
-                  <p>{course.location}</p>
+                  <div className={styles.courseActions}>
+                    <button className={isEnrolled ? styles.dropBtn : styles.enrollBtn} 
+                      onClick={() => toggleEnroll(section)}>
+                      {isEnrolled ? "Drop" : "Enroll"}
+                    </button>
+                  </div>
                 </div>
-
-                <div className={styles.courseActions}>
-                  <button className={styles.viewBtn}>View More</button>
-                  <button
-                    className={isEnrolled ? styles.dropBtn : styles.enrollBtn}
-                    onClick={() => toggleEnroll(course)}
-                  >
-                    {isEnrolled ? "Drop" : "Enroll"}
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
 
         {/* Right side - My Courses */}
         <div className={styles.myCourses}>
           <h3>My Courses</h3>
           {enrolled.length === 0 ? (
-            <p>No courses selected yet</p>
+            <p>No sections selected yet</p>
           ) : (
-            enrolled.map((course) => (
-              <div key={course.id} className={styles.myCourseCard}>
-                <span>{course.title}</span>
-                <small>Credits: {course.credit} Hr</small>
-                <button onClick={() => toggleEnroll(course)}>✖</button>
+            enrolled.map((section) => (
+              <div key={section.id} className={styles.myCourseCard}>
+                <span>{section.title}</span>
+                <small>Credits: {section.credit} Hr</small>
+                <button onClick={() => toggleEnroll(section)}>✖</button>
               </div>
             ))
           )}
 
-          <p className={styles.totalCredits}>
-            Total Credits: {totalCredits} Hr
-          </p>
+          <p className={styles.totalCredits}>Total Credits: {totalCredits} Hr</p>
 
-          <button className={styles.submitBtn} onClick={handleSubmit}>
+          <button
+            className={styles.submitBtn}
+                // should always show
+
+            onClick={()=>{console.log("Button clicked!")
+              handleSubmit()
+                   // should always show
+
+            }}
+            disabled={enrolled.length === 0}
+          >
             Submit Enrollment
           </button>
 

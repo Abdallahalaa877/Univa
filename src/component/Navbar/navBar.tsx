@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
 
         <li>
           <NavLink
-            to="/grades"
+            to="/studentGrades"
             className={({ isActive }) =>
               isActive ? `${styles.link} ${styles.active}` : styles.link
             }

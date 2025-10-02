@@ -9,7 +9,6 @@ const UploadGrades: React.FC = () => {
 
   // TODO: make this dynamic, for now hardcoded example
   const courseSectionId = 1; // replace with real sectionId
-  // const assignmentId = 5; // if uploading assignment grades as faculty
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -29,9 +28,9 @@ const UploadGrades: React.FC = () => {
       const token = localStorage.getItem("token");
 
       const formData = new FormData();
-      formData.append("file", file);
+      // clone the file to prevent ERR_UPLOAD_FILE_CHANGED
+      formData.append("file", new File([file], file.name));
 
-      // 🔹 Admin endpoint for course grades
       const res = await axios.post(
         `http://127.0.0.1:8000/api/course/grades/${courseSectionId}`,
         formData,
@@ -47,7 +46,11 @@ const UploadGrades: React.FC = () => {
       alert("✅ Grades uploaded successfully!");
     } catch (err: any) {
       console.error("❌ Upload failed:", err.response?.data || err.message);
-      alert("❌ Failed to upload grades. Check console for details.");
+      alert(
+        `❌ Failed to upload grades: ${
+          err.response?.data?.message || err.message
+        }`
+      );
     } finally {
       setLoading(false);
     }
@@ -63,7 +66,9 @@ const UploadGrades: React.FC = () => {
         <h2>Upload Grades</h2>
         <p>
           Upload grades for the selected course. Ensure the file is in{" "}
-          <b>CSV format</b> and contains the required fields.
+          <b>CSV format</b> and contains the required fields:{" "}
+          <code>course_Section_id</code>, <code>student_id</code>,{" "}
+          <code>grade</code>.
         </p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
