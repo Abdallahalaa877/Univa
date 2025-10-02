@@ -36,6 +36,11 @@
   border-radius: 8px;
   border: 1px solid #ccc;
   margin-bottom: 15px;
+   display: flex;
+}
+.hero h2,
+.hero p {
+  color: #ffffff; /* make text readable */
 }
 
 .tabs {
